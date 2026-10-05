@@ -1,6 +1,7 @@
 import { FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
+import type { Product } from ".";
 
 export const ScreenContainer = styled(SafeAreaView)`
   flex: 1;
@@ -28,7 +29,7 @@ export const SearchInput = styled.TextInput`
     margin-bottom: 15px;
   `;
 
-export const CategoryList = styled(FlatList)`
+export const CategoryList = styled(FlatList<string>)`
   margin-bottom: 5px;
 `;
 
@@ -50,7 +51,7 @@ export const CategoryText = styled.Text`
   color: #000;
 `;
 
-export const ProductGrid = styled(FlatList)`
+export const ProductGrid = styled(FlatList<Product>)`
   flex: 1;
 `;
 

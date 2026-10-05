@@ -38,6 +38,7 @@ export function Products() {
   const [categories, setCategories] = useState<string[]>([]);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
+
   useEffect(() => {
     async function loadProducts() {
       await fetch("https://fakestoreapi.com/products")
@@ -58,7 +59,7 @@ export function Products() {
     loadCategories();
   }, []);
 
-  const filteredProducts = products.filter(
+  const filteredProducts: Product[] = products.filter(
     (product) =>
       product.title.toLowerCase().includes(search.toLowerCase()) ||
       product.category.toLowerCase().includes(search.toLowerCase()),
@@ -99,7 +100,9 @@ export function Products() {
             <ProductInfo>
               <ProductTitle>{item.title}</ProductTitle>
               <ProductPrice>${item.price.toFixed(2)}</ProductPrice>
-              <ProductRating rating={item.rating.rate} count={item.rating.count} />
+              <ProductRating>
+                {item.rating.rate} ({item.rating.count})
+              </ProductRating>
             </ProductInfo>
           </ProductCard>
         )}
