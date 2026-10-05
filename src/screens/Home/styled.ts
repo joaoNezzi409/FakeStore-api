@@ -49,3 +49,70 @@ export const CategoryText = styled.Text`
   font-weight: 500;
   color: #000;
 `;
+
+export const ProductGrid = styled(FlatList)`
+  flex: 1;
+`;
+
+export const ProductCard = styled.Pressable`
+    width: 48%;
+    min-height: 330px;
+    background-color: #ffffff;
+    border-radius: 14px;
+    padding: 12px;
+    margin-bottom: 14px;
+  `;
+
+export const ProductImage = styled.Image`
+    width: 100%;
+    height: 170px;
+    margin-bottom: 10px;
+  `;
+
+export const ProductInfo = styled.View`
+    flex: 1;
+  `;
+
+export const ProductTitle = styled.Text`
+    font-size: 14px;
+    font-weight: 600;
+    color: #222222;
+    min-height: 42px;
+  `;
+
+export const ProductPrice = styled.Text`
+    font-size: 18px;
+    font-weight: bold;
+    color: #111111;
+    margin-top: 8px;
+  `;
+
+export const ProductRating = styled.Text`
+    font-size: 13px;
+    color: #666666;
+    margin-top: 6px;
+  `;
+
+export const BottomBar = styled.View`
+    height: 60px;
+    flex-direction: row;
+    background-color: #ffffff;
+    border-top-width: 1px;
+    border-top-color: #dddddd;
+  `;
+
+export const BottomBarButton = styled.Pressable`
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+  `;
+
+interface ActiveProps {
+  active?: boolean;
+}
+
+export const BottomBarText = styled.Text<ActiveProps>`
+    color: ${({ active }) => (active ? "#111111" : "#777777")};
+    font-weight: ${({ active }) => (active ? "bold" : "normal")};
+    font-size: 14px;
+  `;

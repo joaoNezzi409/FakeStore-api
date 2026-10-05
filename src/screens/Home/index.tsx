@@ -1,9 +1,20 @@
 import { useEffect, useState } from "react";
 import { FlatList } from "react-native";
 import {
+  BottomBar,
+  BottomBarButton,
+  BottomBarText,
   CategoryChip,
+  CategoryList,
   CategoryText,
   Header,
+  ProductCard,
+  ProductGrid,
+  ProductImage,
+  ProductInfo,
+  ProductPrice,
+  ProductRating,
+  ProductTitle,
   ScreenContainer,
   ScreenTitle,
   SearchInput,
@@ -22,7 +33,7 @@ export function Products() {
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [search, setSearch] = useState("");
-
+  const [category, setCategory] = useState("all");
   useEffect(() => {
     async function loadProducts() {
       await fetch("https://fakestoreapi.com/products")
@@ -56,12 +67,14 @@ export function Products() {
           value={search}
           onChangeText={(text) => setSearch(text)}
         />
-        <FlatList
+        <CategoryList
           data={categories}
           keyExtractor={(item) => item}
           renderItem={({ item }) => (
-            <CategoryChip>
-              <CategoryText>{item}</CategoryText>
+            <CategoryChip active={category === item} onPress={() => setCategory(item)}>
+              <CategoryText active={category === item}>
+                {item === "all" ? "Todos" : item}
+              </CategoryText>
             </CategoryChip>
           )}
           horizontal
@@ -69,6 +82,4 @@ export function Products() {
           contentContainerStyle={{ gap: 8 }}
         />
       </Header>
-    </ScreenContainer>
-  );
-}
+
