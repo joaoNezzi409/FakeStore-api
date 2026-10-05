@@ -27,6 +27,10 @@ export interface Product {
   description: string;
   category: string;
   image: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
 }
 
 export function Products() {
@@ -54,8 +58,10 @@ export function Products() {
     loadCategories();
   }, []);
 
-  const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(search.toLowerCase()),
+  const filteredProducts = products.filter(
+    (product) =>
+      product.title.toLowerCase().includes(search.toLowerCase()) ||
+      product.category.toLowerCase().includes(search.toLowerCase()),
   );
 
   return (
@@ -83,3 +89,39 @@ export function Products() {
         />
       </Header>
 
+      <ProductGrid
+        data={filteredProducts}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <ProductCard>
+            <ProductImage source={{ uri: item.image }} resizeMode="contain" />
+
+            <ProductInfo>
+              <ProductTitle>{item.title}</ProductTitle>
+              <ProductPrice>${item.price.toFixed(2)}</ProductPrice>
+              <ProductRating rating={item.rating.rate} count={item.rating.count} />
+            </ProductInfo>
+          </ProductCard>
+        )}
+      />
+
+      <BottomBar>
+        <BottomBarButton>
+          <BottomBarText active>Início</BottomBarText>
+        </BottomBarButton>
+
+        <BottomBarButton>
+          <BottomBarText> Buscar </BottomBarText>
+        </BottomBarButton>
+
+        <BottomBarButton>
+          <BottomBarText> Carrinho </BottomBarText>
+        </BottomBarButton>
+
+        <BottomBarButton>
+          <BottomBarText> Perfil </BottomBarText>
+        </BottomBarButton>
+      </BottomBar>
+    </ScreenContainer>
+  );
+}
