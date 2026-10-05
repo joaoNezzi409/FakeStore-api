@@ -79,9 +79,7 @@ export function Products() {
           keyExtractor={(item) => item}
           renderItem={({ item }) => (
             <CategoryChip active={category === item} onPress={() => setCategory(item)}>
-              <CategoryText active={category === item}>
-                {item === "all" ? "Todos" : item}
-              </CategoryText>
+              <CategoryText>{item === "all" ? "Todos" : item}</CategoryText>
             </CategoryChip>
           )}
           horizontal
