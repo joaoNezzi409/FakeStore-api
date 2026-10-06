@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { FlatList } from "react-native";
 import {
   BottomBar,
   BottomBarButton,
