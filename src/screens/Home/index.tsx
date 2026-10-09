@@ -90,6 +90,7 @@ export function Products() {
       <ProductGrid
         data={filteredProducts}
         keyExtractor={(item) => item.id.toString()}
+        numColumns={2}
         renderItem={({ item }) => (
           <ProductCard>
             <ProductImage source={{ uri: item.image }} resizeMode="contain" />
