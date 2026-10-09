@@ -58,11 +58,15 @@ export function Products() {
     loadCategories();
   }, []);
 
-  const filteredProducts: Product[] = products.filter(
-    (product) =>
+  const filteredProducts: Product[] = products.filter((product) => {
+    const matchesSearch =
       product.title.toLowerCase().includes(search.toLowerCase()) ||
-      product.category.toLowerCase().includes(search.toLowerCase()),
-  );
+      product.category.toLowerCase().includes(search.toLowerCase());
+
+    const matchesCategory = category === "all" || product.category === category;
+
+    return matchesSearch && matchesCategory;
+  });
 
   return (
     <ScreenContainer>
@@ -74,7 +78,7 @@ export function Products() {
           onChangeText={(text) => setSearch(text)}
         />
         <CategoryList
-          data={categories}
+          data={["all", ...categories]}
           keyExtractor={(item) => item}
           renderItem={({ item }) => (
             <CategoryChip active={category === item} onPress={() => setCategory(item)}>
